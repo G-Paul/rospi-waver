@@ -1,3 +1,7 @@
+## Links: 
+1. [Enable UART communication on Pi4 Ubuntu](https://askubuntu.com/questions/1254376/enable-uart-communication-on-pi4-ubuntu-20-04)
+2. [Fixes for RPI 5 UART over GPIO](https://askubuntu.com/questions/1496927/raspberry-pi-5-uart2-and-uart4-problem)
+
 ## 5 Setting up serial communication on the RPi
 
 The RPi will talk to the motor controllers over serial.
@@ -69,7 +73,17 @@ sudo nano config.txt
 ```
 
 - And then add the new line `dtoverlay=disable-bt` immediately after the existing line `cmdline=cmdline.txt` towards the bottom of the file
+- NOTE: For RPI-5, add `dtoverlay=uart0-pi5` also under `[all]` 
 
 ### 5.6 Restart the RPi
 
 We need to restart for all of these changes to take effect. Execute: `sudo reboot now`
+
+GPIO 14-15 Serial Port will be on `ttyAMA0`
+
+
+## Testing Serial Connection: 
+
+1. Install Minicom: `sudo apt update && sudo apt install minicom`
+2. [Optional] Connect a GPIO between GPIO 14 and 15 to test loopback (RX and TX)
+3. Run `sudo minicom -D /dev/ttyAMA0`. What you type should appear on the screen. 
